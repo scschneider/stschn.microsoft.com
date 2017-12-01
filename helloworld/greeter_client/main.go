@@ -60,16 +60,16 @@ func main() {
 	address2 := os.Args[2] + ":50051"
 	conn1, err := grpc.Dial(address1, grpc.WithInsecure())
 	if err != nil {
-		fmt.Println(address)
-		log.Fatalf("did not connect: %v" + address, err)
+		fmt.Println(address1)
+		log.Fatalf("did not connect: %v" + address1, err)
 	}
 	defer conn1.Close()
 	c1 := pb.NewGreeterClient(conn1)
 
 	conn2, err := grpc.Dial(address2, grpc.WithInsecure())
 	if err != nil {
-		fmt.Println(address)
-		log.Fatalf("did not connect: %v" + address, err)
+		fmt.Println(address2)
+		log.Fatalf("did not connect: %v" + address2, err)
 	}
 	defer conn2.Close()
 	c2:= pb.NewGreeterClient(conn2)

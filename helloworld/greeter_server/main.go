@@ -25,7 +25,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/scschneider/stschn.microsoft.com"
+	pb "github.com/scschneider/stschn.microsoft.com/helloworld/helloworld"
 	"github.com/hpcloud/tail"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
