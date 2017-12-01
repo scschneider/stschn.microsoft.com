@@ -81,7 +81,7 @@ func main() {
 	// }
 
 	go GetLogs(c1)
-	go GetLogs(c2)
+	GetLogs(c2)
 	
 	//r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
 	//if err != nil {
