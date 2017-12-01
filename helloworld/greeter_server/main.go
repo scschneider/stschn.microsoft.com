@@ -21,14 +21,15 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"log"
 	"net"
 
+	pb "github.com/scschneider/stschn.microsoft.com"
 	"github.com/hpcloud/tail"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"
+	//pb "google.golang.org/grpc/examples/helloworld/helloworld"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -45,13 +46,13 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 }
 
 func (s *server) SayHelloAgain(req *pb.HelloRequest, stream pb.Greeter_SayHelloAgainServer) error {
-	t, err := tail.TailFile("/var/log/system.log", tail.Config{Follow: true})
+	t, err := tail.TailFile("/var/log/syslog", tail.Config{Follow: true})
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for line := range t.Lines {
-		fmt.Println(line.Text)
+		//fmt.Println(line.Text)
 		stream.Send(&pb.HelloReply{Message: line.Text})
 	}
 

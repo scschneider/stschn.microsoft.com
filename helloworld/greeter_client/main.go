@@ -56,14 +56,23 @@ func GetLogs(client pb.GreeterClient) {
 
 func main() {
 	// Set up a connection to the server.
-	address := os.Args[1] + ":50051"
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	address1 := os.Args[1] + ":50051"
+	address2 := os.Args[2] + ":50051"
+	conn1, err := grpc.Dial(address1, grpc.WithInsecure())
 	if err != nil {
 		fmt.Println(address)
 		log.Fatalf("did not connect: %v" + address, err)
 	}
-	defer conn.Close()
-	c := pb.NewGreeterClient(conn)
+	defer conn1.Close()
+	c1 := pb.NewGreeterClient(conn1)
+
+	conn2, err := grpc.Dial(address2, grpc.WithInsecure())
+	if err != nil {
+		fmt.Println(address)
+		log.Fatalf("did not connect: %v" + address, err)
+	}
+	defer conn2.Close()
+	c2:= pb.NewGreeterClient(conn2)
 
 	// Contact the server and print out its response.
 	// name := defaultName
@@ -71,7 +80,8 @@ func main() {
 	// 	name = os.Args[1]
 	// }
 
-	GetLogs(c)
+	go GetLogs(c1)
+	go GetLogs(c2)
 	
 	//r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
 	//if err != nil {
